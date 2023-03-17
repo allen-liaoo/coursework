@@ -1,0 +1,42 @@
+extends template 
+block head 
+    title Contact Log
+
+block body 
+    h1 Contact Log
+
+    #contactlog
+        form(action='/contactLog' method='GET')
+            input#all(type="radio" name="category" value="all" checked= (result.category == "all"))
+            label(for="All") All
+            input#question(type="radio" name="category" value="question" checked= (result.category == "question"))
+            label(for="Question") Question
+            input#concern(type="radio" name="category" value="concern" checked= (result.category == "concern"))
+            label(for="Concern") Concern
+            input#comment(type="radio" name="category" value="comment" checked= (result.category == "comment"))
+            label(for="Comment") Comment
+            input#button(type="submit" value="filter")
+
+        if !result.error
+            table 
+                thead: tr 
+                    th from
+                    th title 
+                    th category
+                    th message
+                tbody
+                    each val in result.log
+                        tr
+                            th 
+                                if val.link
+                                    a(href=val.link) #{val.username}
+                                else 
+                                    | #{val.username}
+                                br
+                                a(href='mailto:'+val.email) #{val.email}
+                            th #{val.title}
+                            th #{val.category}
+                            th#msg #{val.msg}
+        else
+            div#contactError: p #{result.log}
+            // An error occurred! The contact logs were not retrieved successfully.

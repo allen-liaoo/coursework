@@ -1,0 +1,236 @@
+body {
+    background-color: rgb(17, 18, 18);
+    margin: 0%;
+    color: rgb(202, 202, 202);
+}
+
+a {
+    color:rgb(110, 182, 197);
+}
+
+/* forms */
+/* if input is required, append * to label/legend */
+.required:after {
+    content:" *";
+    color: red;
+}
+
+/* navigation links */
+#navl {
+    width: 100%;
+    padding: 0.5em;
+    border-bottom-style: solid;
+    border-color:rgb(21, 157, 185);
+    background-color: rgb(19, 30, 43);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#navl div {
+    padding: 0.2em;
+    border-radius: 2em;
+}
+
+#navl div:hover {
+    background-color: rgb(61, 92, 144);
+}
+
+#navl div a {
+    color: rgb(21, 157, 185);
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* About Me page */
+#name {
+    font-size: 5em;
+    text-align: center;
+}
+
+#meimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    width: 50%;
+}
+
+#aboutme {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#aboutme .column {
+    background-color: rgb(41, 63, 71);
+    border-radius: 1.7em;
+    width: 30%;
+    padding: 2em;
+    font-size: 1.1em;
+}
+
+#aboutme .column h3 {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0%;
+}
+
+#aboutme .column b {
+    color: rgb(255, 234, 172);
+}
+
+#aboutme .column i {
+    color: rgb(255, 234, 172);
+}
+
+/* Contacts page */
+h1 {
+    font-size: 3em;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif ;
+    margin: 0.8em;
+}
+
+#contacts_main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+table tr {
+    height: 7vh;
+}
+
+table th, table td {
+    border-style: solid;
+    border-width: 0.01em;
+    border-color: white;
+    padding: 1em;
+}
+
+table tr:nth-child(even) {
+    background-color: rgb(20, 49, 53);
+}
+
+table tr:nth-child(odd) {
+    background-color: rgb(41, 73, 77);
+}
+
+.hide {
+    display: none;
+}
+
+.locimage {
+    width: 6vh;
+    height: auto;
+    float:right;
+    margin : 0.5em;
+}
+
+#sideimage img, #defaultLocImg{
+    width: 25vw;
+}
+
+/* My Widgets */
+#widgets {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+#widgets div {
+    flex-basis: 40%;
+}
+
+/* Contact Me */
+#form {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 1.5em;
+    background-color: rgb(21, 72, 82);
+    border-radius: 2em;
+}
+
+#form h1 {
+    margin-top: 0vh;
+}
+
+/* format the two boxes (radios and concern message) */
+form #flex {
+    display: flex;
+    flex-direction: row;
+}
+
+form #flex > * {
+    flex-basis: 50%;
+    margin: .5em;
+    padding: .2em;
+    border-style: solid;
+}
+
+form #concernMsg {
+    color: red;
+    font-weight: bold;
+}
+
+/* Contact Log */
+#contactlog {
+    width: fit-content; /* stretches the container depending on content width */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 2em;
+    background-color: rgb(21, 72, 82);
+    border-radius: 2em;
+}
+
+#contactlog > * {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contactlog form td {
+    padding: 1em;
+}
+
+#contactlog form #button {
+    margin-left: 1em;
+}
+
+#contactlog table tbody th#msg {
+    white-space: pre-wrap;
+}
+
+#contactError {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    margin: 1em;
+    margin-bottom: 0em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#contactSuccess {
+    border-style: solid;
+    border-color: rgb(29, 255, 100);
+    border-width: 2px;
+    margin: 1em;
+    margin-bottom: 0em;
+    padding-left: 1em;
+    padding-right: 1em;
+}

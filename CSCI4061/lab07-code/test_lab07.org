@@ -1,0 +1,84 @@
+#+TITLE: Lab06 Tests
+#+TESTY: PREFIX="lab07"
+#+TESTY: REPORT_FRACTION=1
+#+TESTY: TIMEOUT=10s
+
+* QUIZ: QUESTIONS.txt
+This test determines if the answers in QUESTIONS.txt are correct. This
+file must be edited so that the correct ( ) choices are replaced with
+(X) AND no other changes are made to the file. If you are confident in
+your answers but think you may have made inadvertent changes to
+QUESTIONS.txt, you can try restoring it with the provided
+QUESTIONS.txt.bk file.
+
+The correct output for the test should be
+>> ./test_quiz_filter QUESTIONS.txt | sha256sum -C QUESTION.sha256
+-: OK
+
+Note: the sha256sum program is used to verify and must be installed to work.
+
+#+TESTY: use_valgrind=0
+
+#+BEGIN_SRC sh
+>> ./test_quiz_filter QUESTIONS.txt | sha256sum -c QUESTIONS.sha256
+-: OK
+#+END_SRC
+
+
+* CODE pipe_sum
+Tests pipe_sum to see if proper communication occurs between the child
+and parent processes.
+
+#+TESTY: use_valgrind=0
+#+BEGIN_SRC sh
+>> ./pipe_sum numbers.txt
+Cumulative Sum: 4
+Cumulative Sum: 12
+Cumulative Sum: 27
+Cumulative Sum: 43
+Cumulative Sum: 66
+Cumulative Sum: 108
+Cumulative Sum: 216
+>> ./pipe_sum numbers2.txt
+Cumulative Sum: 75
+Cumulative Sum: 78
+Cumulative Sum: 177
+Cumulative Sum: 213
+Cumulative Sum: 260
+Cumulative Sum: 348
+Cumulative Sum: 441
+Cumulative Sum: 534
+Cumulative Sum: 534
+Cumulative Sum: 630
+Cumulative Sum: 693
+Cumulative Sum: 720
+Cumulative Sum: 732
+Cumulative Sum: 799
+Cumulative Sum: 874
+Cumulative Sum: 896
+Cumulative Sum: 930
+Cumulative Sum: 971
+Cumulative Sum: 1032
+Cumulative Sum: 1080
+Cumulative Sum: 1093
+Cumulative Sum: 1193
+Cumulative Sum: 1279
+Cumulative Sum: 1294
+Cumulative Sum: 1381
+Cumulative Sum: 1416
+Cumulative Sum: 1435
+Cumulative Sum: 1527
+Cumulative Sum: 1586
+Cumulative Sum: 1656
+Cumulative Sum: 1729
+Cumulative Sum: 1794
+Cumulative Sum: 1829
+Cumulative Sum: 1864
+Cumulative Sum: 1901
+Cumulative Sum: 1945
+Cumulative Sum: 1948
+Cumulative Sum: 1968
+Cumulative Sum: 2005
+Cumulative Sum: 2032
+#+END_SRC
+

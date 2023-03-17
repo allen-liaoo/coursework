@@ -1,0 +1,87 @@
+#+TITLE: Lab03 Tests
+#+TESTY: PREFIX="lab3"
+#+TESTY: REPORT_FRACTION=1
+# #+TESTY: SHOW=1
+
+* QUIZ: QUESTIONS.txt
+This test determines if the answers in QUESTIONS.txt are correct. This file
+must be edited so that the correct ( ) choices are replaced with (X) AND no
+other changes are made to the file. If you are confident in your answers but
+think you may have made inadvertent changes to QUESTIONS.txt, you can try
+restoring it with the provided QUESTIONS.txt.bak file.
+
+The correct output for the test should be
+>> ./test_quiz_filter QUESTIONS.txt | sha256sum -C QUESTION.sha256
+-: OK
+
+Note: the sha256sum program is used to verify and must be installed to work.
+
+#+TESTY: use_valgrind=0
+#+BEGIN_SRC sh
+>> ./test_quiz_filter QUESTIONS.txt | sha256sum -c QUESTIONS.sha256
+-: OK
+#+END_SRC
+
+
+* CODE: fork_wait and fork_exec Tests
+
+** fork_wait
+Runs the 'fork_wait' executable and passes it through the 'test_order_pids'
+script to ensure that that the PIDs have a consistent ordering. Checks that the
+'wait()' / 'waitpid()' system call has been used to correctly cause parent
+processes to wait for children which will lead to a well-defined, ordered
+output shown below.
+
+#+TESTY: use_valgrind=0
+#+BEGIN_SRC sh
+>> ./fork_wait | ./test_order_pids
+START pid: 101 parent_pid: 100
+FINISH pid: 103 parent_pid: 102
+FINISH pid: 102 parent_pid: 104
+FINISH pid: 105 parent_pid: 104
+FINISH pid: 104 parent_pid: 106
+FINISH pid: 108 parent_pid: 107
+FINISH pid: 107 parent_pid: 106
+FINISH pid: 109 parent_pid: 106
+FINISH pid: 106 parent_pid: 101
+FINISH pid: 111 parent_pid: 110
+FINISH pid: 110 parent_pid: 112
+FINISH pid: 113 parent_pid: 112
+FINISH pid: 112 parent_pid: 101
+FINISH pid: 115 parent_pid: 114
+FINISH pid: 114 parent_pid: 101
+FINISH pid: 116 parent_pid: 101
+FINISH pid: 101 parent_pid: 100
+
+>> ./fork_wait | ./test_order_pids
+START pid: 101 parent_pid: 100
+FINISH pid: 103 parent_pid: 102
+FINISH pid: 102 parent_pid: 104
+FINISH pid: 105 parent_pid: 104
+FINISH pid: 104 parent_pid: 106
+FINISH pid: 108 parent_pid: 107
+FINISH pid: 107 parent_pid: 106
+FINISH pid: 109 parent_pid: 106
+FINISH pid: 106 parent_pid: 101
+FINISH pid: 111 parent_pid: 110
+FINISH pid: 110 parent_pid: 112
+FINISH pid: 113 parent_pid: 112
+FINISH pid: 112 parent_pid: 101
+FINISH pid: 115 parent_pid: 114
+FINISH pid: 114 parent_pid: 101
+FINISH pid: 116 parent_pid: 101
+FINISH pid: 101 parent_pid: 100
+#+END_SRC
+
+** fork_exec
+Runs the 'fork_exec' executable to check that the 'cat' command is sucessfully
+executed in the child process and produces the expected output, followed by
+correct output of the child's exit code from the parent process.
+
+#+TESTY: use_valgrind=0
+#+BEGIN_SRC sh
+>> ./fork_exec
+8765adff6ceac208c8eb06641538922e5d31e655707bd2984a1c3e961198e8c4  -
+Child exited with status 0
+#+END_SRC
+

@@ -1,0 +1,70 @@
+extends template
+block head 
+  title My Contacts
+  script(async='' defer='' src='resources/js/myContacts.js')
+
+block body
+    h1 My Contacts
+    #contacts_main
+        table#contactsTable
+            thead
+                tr
+                    th Name
+                    th Location
+                    th Contact Information
+                    th Email
+                    th Link
+            tbody
+                tr
+                    td Isaac
+                    td.loccell
+                        | 7119 Vermont Ave.
+                        br
+                        |                             Sacramento, CA 95820
+                        img.hide.locimage(src='resources/images/isaac_house.jpeg' alt="isaac's house")
+                    td My triplet brother
+                    td: a(href='mailto:abc@umn.edu') abc@umn.edu
+                    td: a(href='http://abc.com') His Webpage
+                tr
+                    td Isabel
+                    td.loccell
+                        | 93 Mayfair Ave.
+                        br
+                        |                             Tallahassee, FL 32303
+                        img.hide.locimage(src='resources/images/isabel_house.jpeg' alt="isabel's house")
+                    td My triplet sister
+                    td: a(href='mailto:def@unw.edu') def@unw.edu
+                    td: a(href='http://def.com') Associated Website
+                tr
+                    td Dora
+                    td.loccell
+                        | 9027 South State Court
+                        br
+                        |                             Clinton Township, MI 48035
+                        img.hide.locimage(src='resources/images/dora_house.webp' alt="dora's house")
+                    td The explorer
+                    td: a(href='mailto:dora@exp.org') dora@exp.org
+                    td: a(href='http://dora.org') Homepage
+                tr
+                    td Joe
+                    td.loccell
+                        | 217 S. Sleepy Hollow St.
+                        br
+                        |                             Coventry, RI 02816
+                        img.hide.locimage(src='resources/images/joe_house.webp' alt="hoe's house")
+                    td Mama!
+                    td: a(href='mailto:your@mama.com') your@mama.com
+                    td: a(href='https://mother.com/') Homepage
+                tr
+                    td God
+                    td.loccell
+                        | 7737 Trinity Rd.
+                        br
+                        |                             Brussels, Belgium
+                        img.hide.locimage(src='resources/images/god_house.jpeg' alt="god's house")
+                    td My greatest foe
+                    td: a(href='mailto:noreply@unknown.com') noreply@unknown.com
+                    td: a(href='https://www.godhatesfags.com/') Visit at your own risk
+        div
+            img#defaultLocImg(src='resources/images/gophers-mascot.png' alt="gopher's mascot")
+            #sideimage

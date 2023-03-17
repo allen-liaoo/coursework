@@ -1,0 +1,52 @@
+extends template
+block head 
+    title Contact Me
+    script(async='' defer='' src='resources/js/contactMe.js')
+
+block body
+    #form
+        form(action='/contactMe' method='POST')
+            h1 Contact Me
+            p.required Required fields are marked with 
+            label.required(for='title') Title:
+            br
+            input#title(type='text' name='title' required='')
+            br
+            label.required(for='email') Email:
+            br
+            input#email(type='email' name='email' required='')
+            br
+            label.required(for='username') Username:
+            br
+            input#username(type='text' name='username' required='')
+            br
+            label(for='link') Link:
+            br
+            input#link(type='url' name='link')
+            br
+            #flex
+                fieldset
+                    legend.required Category of message:
+                    input#question(type='radio' name='category' value='question' required='')
+                    label(for='question') Question
+                    br
+                    input#comment(type='radio' name='category' value='comment' required='')
+                    label(for='comment') Comment
+                    br
+                    input#concern(type='radio' name='category' value='concern' required='')
+                    label(for='concern') Concern
+                    br
+                #concernMsg.hide
+                    p
+                    | In order to best address your concern, please make sure to list the specific way in which I have wronged you.
+                br
+            label.required(for='message') Message:
+            br
+            textarea#message(name='message' rows='4' required='')
+            br
+            input(type='submit')
+
+        if result.sent && result.error
+            div#contactError: p An error occurred! Your message was not successfully sent.
+        else if result.sent
+            div#contactSuccess: p Your message was recieved.

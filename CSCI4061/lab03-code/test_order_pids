@@ -1,0 +1,24 @@
+#!/usr/bin/awk -f
+
+BEGIN{
+  nextpid = 100;
+  pids[1] = "INIT"
+}
+    
+{
+  if( !pids[$5] ){
+    # print "Adding pid",$5," as ",nextpid;
+    pids[$5] = nextpid;
+    nextpid++;
+  }
+  if( !pids[$3] ){
+    # print "Adding pid",$3," as ",nextpid;
+    pids[$3] = nextpid;
+    nextpid++;
+  }
+  $3 = pids[$3];
+  $5 = pids[$5];
+  print;
+}
+    
+    

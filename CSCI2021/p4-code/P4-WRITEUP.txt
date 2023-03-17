@@ -1,0 +1,233 @@
+                              ____________
+
+                               P4 WRITEUP
+                              ____________
+
+
+- Name: Allen Liao
+- NetID: liao0144
+
+Answer the questions below according to the project specification. Write
+your answers directly in this text file and submit it along with your
+code.
+
+
+PROBLEM 1: sumdiag_OPTM()
+=========================
+
+  Do your timing study on csel-keller1250-NN.cselabs.umn.edu
+
+
+(A) Paste Source Code
+~~~~~~~~~~~~~~~~~~~~~
+
+  Paste a copy of your source code for the function `sumdiag_OPTM()'
+
+  ####################### YOUR ANSWER HERE #########################
+  if(vec.len != (mat.rows + mat.cols -1)){
+    printf("sumdiag_base: bad sizes\n");
+    return 1;
+  }
+
+  for(int i=0; i<vec.len; i++){
+    vec.data[i] = 0;
+  }
+
+  int idx = 0;
+  for (int i = 0; i < mat.rows; i++) {    // loop by row then column
+    int d = 0 - i + mat.cols - 1;         // calculate d outside inner loop
+    for(int j = 0; j < mat.cols; j++) {  
+      vec.data[d] += mat.data[idx+j];   // get matrix and vector element and vector element, add them together
+      d++;    // update d
+    }
+    idx += mat.cols;
+  }
+  return 0;
+  ##################################################################
+
+
+(B) Timing on csel-kh1250-NN
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Paste a copy of the results of running `sumdiag_benchmark' on
+  csel-kh1250-NN.cselabs.umn.edu in the space below which shows how your
+  performance optimizations improved on the baseline codes.
+
+  ####################### YOUR ANSWER HERE #########################
+  ==== Matrix Diagonal Sum Benchmark Version 2 ====
+  ------ Tuned for csel-kh1250-NN machines --------
+    SIZE       BASE       OPTM  SPDUP POINTS 
+    512 6.1690e-03 1.6790e-03   3.67   2.67 
+    1024 6.1950e-03 3.2410e-03   1.91   0.91 
+    1101 7.6540e-03 3.6990e-03   2.07   1.07 
+    2048 8.9313e-02 1.3048e-02   6.84   5.84 
+    4099 3.7274e-01 5.1689e-02   7.21   6.21 
+    6001 9.5947e-01 1.0990e-01   8.73   7.73 
+    8191 2.4333e+00 2.1629e-01  11.25  10.25 
+  RAW POINTS: 34.69
+  TOTAL POINTS: 35 / 35
+  ##################################################################
+
+
+(C) Optimizations
+~~~~~~~~~~~~~~~~~
+
+  Describe in some detail the optimizations you used to speed the code
+  up.  THE CODE SHOULD CONTAIN SOME COMMENTS already to describe these
+  but in the section below, describe in English the techniques you used
+  to make the code run faster.  Format your descriptions into discrete
+  chunks such as.
+        Optimization 1: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+
+        Optimization 2: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+
+        ...  Optimization N: Blah bla blah... This should make run
+        faster because yakkety yakeety yak.
+  Full credit solutions will have a least two optimizations and describe
+  WHY these improved performance in at least a couple sentences.
+
+  ####################### YOUR ANSWER HERE #########################
+  Optimization 1: Looping through the matrix row by row since the matrix 
+  is laid out in memory row by row. This enables the program to be run faster 
+  because looping through sequentially maximizes the usage of cached elements,
+  so the time it takes to access the next element is shorter than jumping around.
+
+  Optimization 2: In-line the MGET and VGET so that I can use "idx" variable to avoid 
+  multiplying i by mat.cols each time I need to access the matrix. Less multiplication 
+  takes up less time.
+
+  Optimization 3: Calculate the position in the vector to modify (d) outside the inner loop 
+  and increment d inside the inner loop. This avoids the repetitive calculation of d, which 
+  takes up unnecessary time.
+  ##################################################################
+
+
+PROBLEM 2: Timing Search Algorithms
+===================================
+
+  Do your timing study on csel-kh1250-NN.cselabs.umn.edu. In most cases,
+  report times larger than 1e-03 seconds as times shorter than this are
+  unreliable. Run searches for more repetitions to lengthen run times.
+
+
+(A) Min Size for Algorithmic Differences
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine the size of input array where one starts to see a measurable
+  difference in the performance of the linear and logarithmic
+  algorithms.  Produce a timing table which includes all algorithms
+  which clearly demonstrates an uptick in the times associated with some
+  while others remain much lower.  Identify what size this appears to be
+  a occur.
+
+  ####################### YOUR ANSWER HERE #########################
+  ./search_benchmark 3 6 100000
+  LENGTH SEARCHES      array       list     binary       tree
+     8  1600000 1.4877e-02 7.8180e-03 6.8930e-03 7.1180e-03 
+    16  3200000 2.7281e-02 2.7471e-02 1.6650e-02 1.6658e-02 
+    32  6400000 9.8272e-02 1.4198e-01 3.7916e-02 3.7628e-02 
+    64 12800000 3.8808e-01 7.0081e-01 8.4701e-02 8.7530e-02
+
+  The difference between array/list and binary/tree times for length 32 (~1.1e-02)
+  is more noticible compared to the difference for length 16 (~1.02e-1). So the size 
+  of input array where one starts to see a measurable difference is some number 
+  between 16~32.
+  ##################################################################
+
+
+(B) Linear Search in List vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Determine whether the linear array and linked list search remain
+  approximately at the same performance level as size increases to large
+  data or whether one begins to become favorable over other. Determine
+  the approximate size at which this divergence becomes obvious. Discuss
+  reasons WHY this difference arises.
+
+  ####################### YOUR ANSWER HERE #########################
+  ./search_benchmark 1 10 100000 al
+  LENGTH SEARCHES      array       list
+     2   400000 4.5200e-03 4.1500e-03 
+     4   800000 4.9780e-03 2.5200e-03 
+     8  1600000 8.0550e-03 7.3550e-03 
+    16  3200000 2.5420e-02 2.6868e-02 
+    32  6400000 1.1009e-01 1.4580e-01 
+    64 12800000 3.8563e-01 7.0312e-01 
+   128 25600000 1.2922e+00 2.7024e+00
+
+  Linear array search became favorable at around length 64, where the time
+  difference is around ~3.1e-01. This might be due to the fact that the list 
+  is made of nodes with pointers to other nodes, and these nodes are not guaranteed
+  to be laid out in memory sequentially, unlike an array. So accessing them takes more
+  time than accessing elements in an array.
+  ##################################################################
+
+
+(C) Binary Search in Tree vs Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Compare the binary array search and binary tree search on small to
+  very large arrays. Determine if there is a size at which the
+  performance of these two begins to diverge. If so, describe why this
+  might be happening based on your understanding of the data structures
+  and the memory system. If not, describe why you believe there is
+  little performance difference between the two.
+
+  ####################### YOUR ANSWER HERE #########################
+  ./search_benchmark 1 20 10000 bt
+LENGTH SEARCHES     binary       tree
+     2    40000 4.2600e-04 4.0200e-04 
+     4    80000 9.2700e-04 8.0000e-04 
+     8   160000 2.0570e-03 1.8220e-03 
+    16   320000 4.1440e-03 4.1320e-03 
+    32   640000 4.0880e-03 4.4860e-03 
+    64  1280000 9.2320e-03 9.9530e-03 
+   128  2560000 2.5568e-02 2.1972e-02 
+   256  5120000 1.2400e-01 1.0321e-01 
+   512 10240000 2.9407e-01 2.6148e-01 
+  1024 20480000 6.1118e-01 6.0472e-01 
+  2048 40960000 1.2486e+00 1.3458e+00 
+  4096 81920000 2.6400e+00 2.9212e+00 
+  8192 163840000 5.5690e+00 6.1153e+00
+
+  They're performance starts to differ at around length 128 (for ~4e-03). 
+  I think why this happens is similar to the last question, where the tree 
+  uses nodes and pointers while the array has its data laid out sequentially
+  in memory, so the time it takes to access things differ.
+  ##################################################################
+
+
+(D) Caching Effects on Algorithms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  It is commonly believed that memory systems that feature a Cache will
+  lead to arrays performing faster than linked structures such as Linked
+  Lists and Binary Search Trees. Describe whether your timings confirm
+  or refute this belief.  Address both types of algorithms in your
+  answer:
+  - What effects does Cache have on Linear Search in arrays and lists
+    and why?
+  - What effects does Cache have on Binary Search in arrays and trees
+    and why?
+
+  ####################### YOUR ANSWER HERE #########################
+  My timings confirm this belief. Caching an array is easier because the data 
+  is laid out sequentially in memory, so most of the data gets cached at once.
+  But it's not possible to cache a big chunk of a linked list or binary tree when
+  their data isn't laid out sequentially in memory. The computer will have to re-cache 
+  the data a lot more times, which takes longer time.
+  ##################################################################
+
+
+(E) OPTIONAL MAKEUP CREDIT
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  If you decided to make use of a table of function pointers/structs
+  which is worth makeup credit, describe your basic design for this
+  below.
+
+  ####################### YOUR ANSWER HERE #########################
+
+  ##################################################################

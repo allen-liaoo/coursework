@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title colors
+    link(rel="stylesheet", href="style.css")
+    script(src="code.js" async defer) 
+  body
+    div.colors
+      each color in colors
+        div.color(style=`background-color:${color.color_code}`)= color.name
+    form(action="/main" method="post")
+      input(name="name" placeholder="color name" maxlength="255" required)
+      input(name="color_code" type="color" required)
+      input(type="submit")

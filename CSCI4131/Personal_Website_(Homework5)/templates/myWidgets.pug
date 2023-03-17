@@ -1,0 +1,66 @@
+extends template 
+block head
+    title My Widgets
+    link(rel='stylesheet' href='resources/css/widget.css')
+    link(rel='stylesheet' href='resources/css/passwordWidget.css')
+    link(rel='stylesheet' href='resources/css/weatherWidget.css')
+    script(async='' defer='' src='resources/js/passwordWidget.js')
+    script(async='' defer='' src='resources/js/timeWidget.js')
+    script(async='' defer='' src='resources/js/weatherWidget.js')
+    script(async='' defer='' src='resources/js/clickWidget.js')
+block body
+    h1 My Widgets
+    #widgets
+        div
+            iframe(width='560' height='315' src='https://www.youtube.com/embed/jNQXAC9IVRw' title='YouTube video player' style='border: none;' allow='accelerometer; autoplay; clipboard-write; \
+            encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+        div
+            blockquote.twitter-tweet
+                p(lang='en' dir='ltr') We can neither confirm nor deny that this is our first tweet.
+                | &mdash; CIA (@CIA) 
+                a(href='https://twitter.com/CIA/status/474971393852182528?ref_src=twsrc%5Etfw') June 6, 2014
+            script(async='' src='https://platform.twitter.com/widgets.js')
+        .jscontainer
+            .header
+                h2 Password Strength Checking with JS
+                hr
+            .content
+                form#register(name='register')
+                    label(for='password') Password :
+                    input#password(name='password' type='password' placeholder='Type Your Password here')
+                    span#pwdresult
+        .jscontainer
+            .header
+                h2 Time Until the end of the semester
+                hr
+            .content
+                span#timeuntil
+        #weatherContainer.jscontainer
+            .header
+                h2 weather
+                hr
+            .content
+                p#weatherStatus
+                form
+                    div
+                        span Coordinates:
+                        input#latitude-input(type='text' placeholder='Latitude')
+                        input#longitude-input(type='text' placeholder='Longitude')
+                    div
+                        button#find-me(type='button') Auto-Find me!
+                        button#get-weather-btn(type='button') Find The Weather!
+                #weatherOutput
+                    p#temp-display
+                    p#cloud-cover-display
+                    p#sunrise-display
+                    p#sunset-display
+                // Interesting fact. We're legally required to put this here.
+                a(href='https://open-meteo.com/') Weather data by Open-Meteo.com
+                a(href='https://sunrise-sunset.org/') Sunrise and sunset data by sunrise-sunset.org
+        .jscontainer
+            .header
+                h2 Click Toy
+                hr
+            .content
+                form
+                    input#click(type="button" value="check") 

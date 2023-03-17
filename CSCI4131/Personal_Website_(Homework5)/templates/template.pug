@@ -1,0 +1,23 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    link(rel='stylesheet' href='resources/css/myStyle.css')
+    block head
+body
+    nav#navl 
+        div 
+            a(href="myAboutMe") About Me
+        div 
+            a(href="myWidgets") Widgets
+        div 
+            a(href="myContacts") Contacts 
+        div 
+            a(href="contactMe") Contact Me
+        div 
+            a(href="contactLog") Contact Log
+        div 
+            if login.loggedIn
+                a(href="login") #{login.username}
+            else 
+                a(href="login") login
+    block body

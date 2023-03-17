@@ -1,0 +1,15 @@
+get 1
+insert apple
+insert banana
+print
+clear
+print
+insert pen
+insert pineapple
+get 0
+insert apple
+get 1
+insert pen
+print
+clear
+exit

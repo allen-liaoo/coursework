@@ -1,0 +1,19 @@
+extends template
+block body 
+    if login.loggedIn 
+        h1 Welcome! #{login.username}
+        #form
+            form(action='/logout' method='POST')
+                input(type='submit' value='logout')
+
+    else 
+        h1 Log In
+        #form
+            form(action='/login' method='POST')
+                label.required(for='username') Username:
+                input#username(type='text' name='username' required='') 
+                br
+                label.required(for='password') Password:
+                input#username(type='password' name='password' required='') 
+                br
+                input(type='submit' value='login')
