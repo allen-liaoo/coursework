@@ -1,0 +1,14 @@
+*.DS_STORE
+*~
+*.o
+*.bin
+*.out
+*.org
+*.zip
+*.bak
+*.sha256
+*.tmp
+*.script
+*.hashset
+*.bak
+*.tm
