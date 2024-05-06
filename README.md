@@ -1,2 +1,2 @@
 # coursework
-Where all my homeworks and school projects gather.
+Where my homeworks and school projects gather. Very incomplete, lost most projects.
