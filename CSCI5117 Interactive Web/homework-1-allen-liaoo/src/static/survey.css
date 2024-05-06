@@ -1,0 +1,7 @@
+#confirm ~ #nameContainer {
+    display: none;
+}
+
+#confirm:checked ~ #nameContainer {
+    display: block;
+}

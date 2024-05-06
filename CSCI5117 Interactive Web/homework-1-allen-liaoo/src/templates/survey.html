@@ -1,0 +1,51 @@
+{% extends "frame.html" %}
+{% block headers %}
+<link rel="stylesheet" href="../static/survey.css">
+{% endblock %}
+{% block body %}
+<div class="global-container">
+    <h1>Survey</h1>
+    <!-- The outline of this istaken from purecss -->
+    <form class="pure-form pure-form-stacked" action="/api/postSurvey" method="POST">
+        <fieldset>
+            <label for="crednumber">Credit Card Number</label>
+            <input type="text" id="crednumber" name="crednumber" placeholder="XXXX-XXXX-XXXX-XXXX" required="" minlength="16"/>
+            <span class="pure-form-message">This is a required field.</span>
+
+            <label for="password">Security Code (CVV)</label>
+            <input type="password" id="password" name="password" placeholder="XXX" required minlength="3"/>
+            <span class="pure-form-message">This is a required field.</span>
+
+            <fieldset>
+                <legend>Social Class</legend>
+                <label><input type="radio" name="soclass" value="upper"/>
+                <span class="pure-form-message-inline">Upper Class</span></label>
+
+                <label><input type="radio" name="soclass" value="middle"/>
+                <span class="pure-form-message-inline">Middle Class</span></label>
+
+                <label><input type="radio" name="soclass" value="lower"/>
+                <span class="pure-form-message-inline">Lower Class</span></label>
+                <span class="pure-form-message">This is not required, but we would like to know ;)</span>
+            </fieldset>
+
+            <label for="robot">Are you a robot?</label>
+            <select id="robot" name="robot">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="maybe">Maybe</option>
+            </select>
+
+            <input type="checkbox" id="confirm" />
+            <span class="pure-form-message-inline">I hereby grant authorization for you to utilize my funds through my credit card.</span>
+
+            <div id="nameContainer">
+                <label for="name">Your name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" />
+            </div>
+
+            <button type="submit" class="pure-button button-success">Next</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

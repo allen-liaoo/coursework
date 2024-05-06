@@ -1,0 +1,39 @@
+.global-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.global-container * {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-success {
+    color: white;
+    background-color: rgb(67, 202, 67);
+}
+
+.button-error {
+    color: white;
+    background-color: rgb(216, 65, 65);
+}
+
+/* Button sizes css from purecss */
+.button-xsmall {
+    font-size: 70%;
+}
+
+.button-small {
+    font-size: 85%;
+}
+
+.button-large {
+    font-size: 110%;
+}
+
+.button-xlarge {
+    font-size: 125%;
+}

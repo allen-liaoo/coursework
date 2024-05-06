@@ -1,0 +1,24 @@
+{% extends "frame.html" %}
+
+{% block headers %}
+<style>
+#home-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#home-buttons * {
+    margin: 5%;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="global-container">
+    <h1>Do you want to take THE survey?</h1>
+    <div id="home-buttons">
+        <a class="pure-button button-success button-xlarge" href="/survey">Consent</a>
+        <a class="pure-button button-error button-xlarge" href="/decline">Decline</a>
+    </div>
+</div>
+{% endblock %}
